@@ -5,7 +5,9 @@
   "author": "adh@rsd.com",
   "description": "A simple helpful robot for RSD.",
   "dependencies": {
+    "htmlparser": "^1.7.6",
     "hubot": "^2.11.4",
+    "hubot-daily-comic": "latest",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.1.4",
     "hubot-google-translate": "^0.1.0",
@@ -19,8 +21,7 @@
     "hubot-shipit": "^0.1.2",
     "hubot-slack": "^3.3.0",
     "hubot-youtube": "^0.1.2",
-    "hubot-daily-comic": "latest",
-    "htmlparser": "^1.7.6"
+    "yql": "^1.0.2"
   },
   "engines": {
     "node": "0.10.x"
