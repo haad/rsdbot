@@ -48,7 +48,7 @@ menuRequest = (page, msg) ->
           response = response.trim()
           response = response + '\n'
           response.substr(0, 2)
-          newResponse += response
+          newResponse += '•' + response
         j++
       msg.send newResponse
 
