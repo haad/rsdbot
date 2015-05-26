@@ -46,9 +46,14 @@ menuRequest = (page, msg) ->
           response = response.replace(/(<([^>]+)>)/ig, "")
           response = response.replace(/\W+/, '')
           response = response.trim()
+
+          if r[j].span? && r[j].span.b?
+            response = response + ' (' + r[j].span.b + ')'
+
           response = response + '\n'
           response.substr(0, 2)
-          newResponse += '•' + response
+          response = '• ' + response
+          newResponse += response
         j++
       msg.send newResponse
 
