@@ -26,6 +26,10 @@ pages = [
   {
     title: 'Presto',
     url: 'http://restauracie.sme.sk/restauracia/presto-bbc-i_2406-ruzinov_2980/denne-menu'
+  },
+  {
+      title: 'Buddies',
+      url: 'http://restauracie.sme.sk/restauracia/buddies_7319-ruzinov_2980/denne-menu'
   }
 ]
 
