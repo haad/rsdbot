@@ -5,6 +5,7 @@
   "author": "adh@rsd.com",
   "description": "A simple helpful robot for RSD.",
   "dependencies": {
+    "nodepie": "^0.6.7",
     "htmlparser": "^1.7.6",
     "hubot": "^2.11.4",
     "hubot-daily-comic": "latest",
