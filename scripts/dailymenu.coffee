@@ -59,9 +59,12 @@ menuRequest = (page, msg) ->
           response = '• ' + response
           newResponse += response
         j++
-      msg.send newResponse
+    else
+      newResponse = '*' + page.title + '*\n_Menu nie je dostupné_\n'
+    msg.send newResponse
 
 getDailyMenu = (pages, msg) ->
+  msg.send "Hľadám denné menu..."
   numberOfPages = pages.length
   i = 0
 
