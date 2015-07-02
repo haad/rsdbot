@@ -22,6 +22,7 @@
     "hubot-shipit": "^0.1.2",
     "hubot-slack": "^3.3.0",
     "hubot-youtube": "^0.1.2",
+    "hubot-stackstorm": "^0.1.1",
     "yql": "^1.0.2"
   },
   "engines": {
