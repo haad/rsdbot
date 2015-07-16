@@ -1,4 +1,8 @@
 #!/bin/sh
+##########
+# Test if there is a file called .envset in our homedir and source it
+test -f ~/.envset && source ~/.envset
+##########
 
 set -e
 
