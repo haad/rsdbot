@@ -1,12 +1,11 @@
 #!/bin/sh
 ##########
 # Test if there is a file called .envset in our homedir and source it
-test -f ~/.envset && source ~/.envset
+test -f ~/.envset && . ~/.envset
 ##########
 
 set -e
 
-npm install
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 
 exec node_modules/.bin/hubot --name "rsdbot" "$@"
