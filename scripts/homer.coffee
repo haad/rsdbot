@@ -38,7 +38,7 @@ internetQuotes = [
 module.exports = (robot) ->
   robot.hear /beer/i, (msg) ->
     msg.send msg.random beerQuotes
-  robot.hear /bacon|bagel|barbecue|burger|candy|chocolate|donut|sandwich|breakfast|lunch|dinner|food|grub/i, (msg) ->
+  robot.hear /bacon|bagel|barbecue|burger|candy|chocolate|donut|fondue|sandwich|breakfast|lunch|dinner|food|grub/i, (msg) ->
     msg.send "Mmmm... " + msg.match[0]
   robot.hear /try/i, (msg) ->
     msg.send msg.random tryQuotes
