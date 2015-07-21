@@ -99,13 +99,14 @@ module.exports = (robot) ->
   burgers = new Burgers robot
   
   robot.respond /burger rate (.+) ([0-9]|10)$/i, (res) ->
-    res.send("Burger rate")
     reviewer = res.message.user.name
     place = res.match[1]
     rating = res.match[2]
     burgers.rate(reviewer, place, rating, res)
-    res.send("Rating #{rating} for #{place} by #{reviewer} added.")
 
   robot.respond /burger show$/, (res) ->
-    res.send("Burger show")
     burgers.show(res)
+  
+  robot.respond /burger reset$/, (res) ->
+    burger.reset()
+    res.send("Burger ratings cleared")
