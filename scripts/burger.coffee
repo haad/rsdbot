@@ -92,7 +92,7 @@ class Burgers
     res.send(s)
     
   reset: ->
-    @ratings = []
+    @ratings = {}
     @robot.brain.data.burger_ratings = @ratings
 
 module.exports = (robot) ->
