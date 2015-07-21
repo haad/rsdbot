@@ -108,5 +108,5 @@ module.exports = (robot) ->
     burgers.show(res)
   
   robot.respond /burger reset$/, (res) ->
-    burger.reset()
+    burgers.reset()
     res.send("Burger ratings cleared")
