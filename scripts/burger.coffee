@@ -49,7 +49,7 @@ class Burgers
 
       @robot.brain.data.burger_ratings = @ratings
       if rating < 4 # 0-3
-        res.send("#{rating}? I wouldn't feed me dog with that!")
+        res.send("#{rating}? I wouldn't feed my dog with that!")
       else if rating < 6 # 4-5
         res.send("Isn't even McDonalds better than that?")
       else if rating < 8 # 6-7
