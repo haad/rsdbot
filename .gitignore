@@ -4,3 +4,4 @@ node_modules
 .envset
 tmp
 .npm
+npm-debug.log
