@@ -95,6 +95,10 @@ class Burgers
     @ratings = {}
     @robot.brain.data.burger_ratings = @ratings
 
+  delete_place: (place) ->
+    delete @ratings[place]
+    @robot.brain.data.burger_ratings = @ratings
+
 module.exports = (robot) ->
   burgers = new Burgers robot
   
@@ -110,3 +114,6 @@ module.exports = (robot) ->
   robot.respond /burger reset$/, (res) ->
     burgers.reset()
     res.send("Burger ratings cleared")
+
+  robot.respond /burger delete place (.+)$/i, (res) ->
+    burgers.delete_place(res.match[1])
