@@ -9,24 +9,24 @@
 # Configuration:
 #   HUBOT_JIRA_URL (format: "https://jira-domain.com:9090")
 #   HUBOT_JIRA_IGNORECASE (optional; default is "true")
-#   HUBOT_JIRA_USERNAME (optional)
+#   HUBOT_JIRA_USER (optional)
 #   HUBOT_JIRA_PASSWORD (optional)
 #   HUBOT_JIRA_ISSUES_IGNORE_USERS (optional, format: "user1|user2", default is "jira|github")
 #
 # Commands:
-# 
+#
 # Author:
 #   stuartf
 
 module.exports = (robot) ->
   cache = []
 
-  # In case someone upgrades form the previous version, we'll default to the 
+  # In case someone upgrades form the previous version, we'll default to the
   # previous behavior.
   jiraUrl = process.env.HUBOT_JIRA_URL || "https://#{process.env.HUBOT_JIRA_DOMAIN}"
-  jiraUsername = process.env.HUBOT_JIRA_USERNAME
+  jiraUsername = process.env.HUBOT_JIRA_USER
   jiraPassword = process.env.HUBOT_JIRA_PASSWORD
-  
+
   if jiraUsername != undefined && jiraUsername.length > 0
     auth = "#{jiraUsername}:#{jiraPassword}"
 
@@ -66,7 +66,7 @@ module.exports = (robot) ->
 
                   message = "[" + key + "] " + json.fields.summary
                   message += '\nStatus: '+json.fields.status.name
-                  
+
                   if (json.fields.assignee == null)
                     message += ', unassigned'
                   else if ('value' of json.fields.assignee or 'displayName' of json.fields.assignee)
@@ -81,7 +81,7 @@ module.exports = (robot) ->
                     message += ', fixVersion: '+json.fields.fixVersions[0].name
                   else
                     message += ', fixVersion: NONE'
-                  
+
                   if json.fields.priority and json.fields.priority.name
                     message += ', priority: ' + json.fields.priority.name
 
