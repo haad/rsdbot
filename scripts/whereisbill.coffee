@@ -25,7 +25,9 @@ places = [
   "Well, maybe he went to get a mohawk",
   "And maybe he went to get some gnarly thrash boots",
   "Maybe he went to go ride his skateboard",
-  "Maybe he went to see the Circle Jerks "
+  "Maybe he went to see the Circle Jerks ",
+  "Went to have a coffee with Angelo ",
+  "Is updating presales01 with Attila"
 ]
 
 module.exports = (robot) ->
