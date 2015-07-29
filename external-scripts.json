@@ -12,6 +12,6 @@
   "hubot-daily-comic",
   "hubot-stackstorm",
   "hubot-jira",
-  "hubot-jira-issues"
+  "hubot-jira-issues",
   "hubot-jenkins"
 ]
