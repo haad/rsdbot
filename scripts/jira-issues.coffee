@@ -38,61 +38,62 @@ module.exports = (robot) ->
     .auth(auth)
     .get() (err, res, body) ->
       json = JSON.parse(body)
-      jiraPrefixes = ( entry.key for entry in json )
-      reducedPrefixes = jiraPrefixes.reduce (x,y) -> x + "-|" + y
-      jiraPattern = "/\\b(" + reducedPrefixes + "-)(\\d+)\\b/g"
-      ic = process.env.HUBOT_JIRA_IGNORECASE
-      if ic == undefined || ic == "true"
-        jiraPattern += "i"
+      if json.length > 0
+        jiraPrefixes = ( entry.key for entry in json )
+        reducedPrefixes = jiraPrefixes.reduce (x,y) -> x + "-|" + y
+        jiraPattern = "/\\b(" + reducedPrefixes + "-)(\\d+)\\b/g"
+        ic = process.env.HUBOT_JIRA_IGNORECASE
+        if ic == undefined || ic == "true"
+          jiraPattern += "i"
 
-      robot.hear eval(jiraPattern), (msg) ->
-        return if msg.message.user.name.match(new RegExp(jiraIgnoreUsers, "gi"))
+        robot.hear eval(jiraPattern), (msg) ->
+          return if msg.message.user.name.match(new RegExp(jiraIgnoreUsers, "gi"))
 
-        for i in msg.match
-          issue = i.toUpperCase()
-          now = new Date().getTime()
-          if cache.length > 0
-            cache.shift() until cache.length is 0 or cache[0].expires >= now
+          for i in msg.match
+            issue = i.toUpperCase()
+            now = new Date().getTime()
+            if cache.length > 0
+              cache.shift() until cache.length is 0 or cache[0].expires >= now
 
-          msg.send item.message for item in cache when item.issue is issue
+            msg.send item.message for item in cache when item.issue is issue
 
-          if cache.length == 0 or (item for item in cache when item.issue is issue).length == 0
-            robot.http(jiraUrl + "/rest/api/2/issue/" + issue)
-              .auth(auth)
-              .get() (err, res, body) ->
-                try
-                  json = JSON.parse(body)
-                  key = json.key
-
-                  message = "[" + key + "] " + json.fields.summary
-                  message += '\nStatus: '+json.fields.status.name
-
-                  if (json.fields.assignee == null)
-                    message += ', unassigned'
-                  else if ('value' of json.fields.assignee or 'displayName' of json.fields.assignee)
-                    if (json.fields.assignee.name == "assignee" and json.fields.assignee.value.displayName)
-                      message += ', assigned to ' + json.fields.assignee.value.displayName
-                    else if (json.fields.assignee and json.fields.assignee.displayName)
-                      message += ', assigned to ' + json.fields.assignee.displayName
-                  else
-                    message += ', unassigned'
-                  message += ", rep. by "+json.fields.reporter.displayName
-                  if json.fields.fixVersions and json.fields.fixVersions.length > 0
-                    message += ', fixVersion: '+json.fields.fixVersions[0].name
-                  else
-                    message += ', fixVersion: NONE'
-
-                  if json.fields.priority and json.fields.priority.name
-                    message += ', priority: ' + json.fields.priority.name
-
-                  urlRegex = new RegExp(jiraUrl + "[^\\s]*" + key)
-                  if not msg.message.text.match(urlRegex)
-                    message += "\n" + jiraUrl + "/browse/" + key
-
-                  msg.send message
-                  cache.push({issue: issue, expires: now + 120000, message: message})
-                catch error
+            if cache.length == 0 or (item for item in cache when item.issue is issue).length == 0
+              robot.http(jiraUrl + "/rest/api/2/issue/" + issue)
+                .auth(auth)
+                .get() (err, res, body) ->
                   try
-                    msg.send "[*ERROR*] " + json.errorMessages[0]
-                  catch reallyError
-                    msg.send "[*ERROR*] " + reallyError
+                    json = JSON.parse(body)
+                    key = json.key
+
+                    message = "[" + key + "] " + json.fields.summary
+                    message += '\nStatus: '+json.fields.status.name
+
+                    if (json.fields.assignee == null)
+                      message += ', unassigned'
+                    else if ('value' of json.fields.assignee or 'displayName' of json.fields.assignee)
+                      if (json.fields.assignee.name == "assignee" and json.fields.assignee.value.displayName)
+                        message += ', assigned to ' + json.fields.assignee.value.displayName
+                      else if (json.fields.assignee and json.fields.assignee.displayName)
+                        message += ', assigned to ' + json.fields.assignee.displayName
+                    else
+                      message += ', unassigned'
+                    message += ", rep. by "+json.fields.reporter.displayName
+                    if json.fields.fixVersions and json.fields.fixVersions.length > 0
+                      message += ', fixVersion: '+json.fields.fixVersions[0].name
+                    else
+                      message += ', fixVersion: NONE'
+
+                    if json.fields.priority and json.fields.priority.name
+                      message += ', priority: ' + json.fields.priority.name
+
+                    urlRegex = new RegExp(jiraUrl + "[^\\s]*" + key)
+                    if not msg.message.text.match(urlRegex)
+                      message += "\n" + jiraUrl + "/browse/" + key
+
+                    msg.send message
+                    cache.push({issue: issue, expires: now + 120000, message: message})
+                  catch error
+                    try
+                      msg.send "[*ERROR*] " + json.errorMessages[0]
+                    catch reallyError
+                      msg.send "[*ERROR*] " + reallyError
