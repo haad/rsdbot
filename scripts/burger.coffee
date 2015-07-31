@@ -71,21 +71,18 @@ class Burgers
     for p in places
       p_max_length = Math.max(p_max_length, p.length)
 
-    for r in reviewers
-      r_max_length = Math.max(r_max_length, r.length)
-
     s = "```\n#{' '.repeat(p_max_length + 1)}"
 
     for r in reviewers
-      s += "#{r}#{' '.repeat(r_max_length - r.length + 1)}"
+      s += "#{r} "
 
     for p in places
       s += "\n#{p}#{' '.repeat(p_max_length - p.length + 1)}"
       for r in reviewers
-        @ratings[p][r] = "-" unless @ratings[p][r]?
-        s += "#{@ratings[p][r]}#{' '.repeat(r_max_length - 1)}"
-        if @ratings[p][r] != 10
-          s += " "
+        rating = if @ratings[p][r]? then @ratings[p][r] else "-"
+        lpad = Math.floor((r.length - rating.length) / 2)
+        rpad =  r.length - lpad - rating.length + 1
+        s += ' '.repeat(lpad) + rating + ' '.repeat(rpad)
 
     s += "\n```"
 
