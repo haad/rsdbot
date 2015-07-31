@@ -22,13 +22,16 @@ beerQuotes = [
   "Mmmm... beer",
   "Beer: The cause of, and solution to, all of life's problems.",
   "Beer, beer, beer, bed, bed, bed.",
-  "I would kill everyone in this room for a drop of sweet beer."
+  "I would kill everyone in this room for a drop of sweet beer.",
+  "Now son, you don’t want to drink beer. That’s for Daddys, and kids with fake IDs.",
+  "A woman is like beer. They look good, they smell good, and you’d step over your own mother just to get one!",
+  "Ah, good ol’ trustworthy beer. My love for you will never die."
 ]
 
-tryQuotes = [
-  "Kids, you tried your best and you failed miserably. The lesson is, never try.",
-  "Trying is the first step towards failure."
-]
+#tryQuotes = [
+#  "Kids, you tried your best and you failed miserably. The lesson is, never try.",
+#  "Trying is the first step towards failure."
+#]
 
 internetQuotes = [
   "Oh, so they have internet on computers now!",
@@ -38,9 +41,9 @@ internetQuotes = [
 module.exports = (robot) ->
   robot.hear /beer/i, (msg) ->
     msg.send msg.random beerQuotes
-  robot.hear /bacon|bagel|barbecue|burger|candy|chocolate|donut|fondue|sandwich|breakfast|lunch|dinner|food|grub/i, (msg) ->
+  robot.hear /bacon|bagel|barbecue|candy|chocolate|donut|fondue|sandwich|breakfast|lunch|dinner|food|grub/i, (msg) ->
     msg.send "Mmmm... " + msg.match[0]
-  robot.hear /try/i, (msg) ->
-    msg.send msg.random tryQuotes
+#  robot.hear /try/i, (msg) ->
+#    msg.send msg.random tryQuotes
   robot.hear /internet/i, (msg) ->  
     msg.send msg.random internetQuotes
