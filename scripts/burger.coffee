@@ -96,6 +96,12 @@ class Burgers
     delete @ratings[place]
     @robot.brain.data.burger_ratings = @ratings
 
+  merge_places: (p1, p2) ->
+    reviewers = this.reviewers()
+    for r in reviewers
+      @ratings[p1][r] = @ratings[p2][r]
+    @robot.brain.data.burger_ratings = @ratings
+
 module.exports = (robot) ->
   burgers = new Burgers robot
   
@@ -103,7 +109,7 @@ module.exports = (robot) ->
     reviewer = res.message.user.name
     place = res.match[1]
     rating = res.match[2]
-    burgers.rate(reviewer, place, rating, res)
+    burgers.rate(reviewer, place.trim(), rating, res)
 
   robot.respond /burger show$/, (res) ->
     burgers.show(res)
@@ -114,3 +120,6 @@ module.exports = (robot) ->
 
   robot.respond /burger delete place (.+)$/i, (res) ->
     burgers.delete_place(res.match[1])
+
+  robot.respond /burger merge places (.+) (.+)$/i, (res) ->
+    burgers.merge_places(res.match[1], res.match[2])
