@@ -3,7 +3,6 @@
   "hubot-help",
   "hubot-google-images",
   "hubot-google-translate",
-  "hubot-pugme",
   "hubot-maps",
   "hubot-redis-brain",
   "hubot-rules",
@@ -11,5 +10,8 @@
   "hubot-youtube",
   "hubot-daily-comic",
   "hubot-jira",
-  "hubot-jenkins"
+  "hubot-jenkins",
+  "hubot-codinglove",
+  "hubot-jenkins-notifier",
+  "hubot-gitlab-hooks"
 ]

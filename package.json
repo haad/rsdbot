@@ -7,15 +7,17 @@
   "dependencies": {
     "htmlparser": "^1.7.6",
     "hubot": "^2.13.2",
+    "hubot-codinglove": "^0.2.6",
     "hubot-daily-comic": "latest",
     "hubot-diagnostics": "0.0.1",
+    "hubot-gitlab-hooks": "^0.5.0",
     "hubot-google-images": "^0.1.4",
     "hubot-google-translate": "^0.1.0",
     "hubot-help": "^0.1.1",
     "hubot-jenkins": "^1.0.2",
+    "hubot-jenkins-notifier": "^0.1.5",
     "hubot-jira": "^1.0.2",
     "hubot-maps": "0.0.2",
-    "hubot-pugme": "^0.1.0",
     "hubot-redis-brain": "0.0.2",
     "hubot-rules": "^0.1.0",
     "hubot-scripts": "^2.5.16",
@@ -23,7 +25,6 @@
     "hubot-slack": "slackhq/hubot-slack#master",
     "hubot-stackstorm": "^0.1.2",
     "hubot-youtube": "^0.1.4",
-    "nodepie": "^0.6.7",
     "yql": "^1.0.2"
   },
   "engines": {
