@@ -25,6 +25,7 @@
     "hubot-slack": "slackhq/hubot-slack#master",
     "hubot-stackstorm": "^0.1.2",
     "hubot-youtube": "^0.1.4",
+    "moment": "^2.10.6",
     "yql": "^1.0.2"
   },
   "engines": {

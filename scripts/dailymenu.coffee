@@ -13,6 +13,7 @@
 
 
 YQL = require "yql"
+moment = require "moment"
 
 pages = [
   {
@@ -30,6 +31,10 @@ pages = [
   {
       title: 'Buddies',
       url: 'http://restauracie.sme.sk/restauracia/buddies_7319-ruzinov_2980/denne-menu'
+  },
+  {
+    title: 'Top Gastro Gurmán',
+    url: 'http://restauracie.sme.sk/restauracia/top-gastro-gurman_3291-ruzinov_2980/denne-menu'
   }
 ]
 
@@ -62,10 +67,13 @@ menuRequest = (page, msg) ->
     else
       newResponse = '*' + page.title + '*\n_Menu nie je dostupné_\n'
     msg.send newResponse
+    #return newReponse
 
 getDailyMenu = (pages, msg) ->
-  msg.send "Hľadám denné menu..."
+  day = moment().format('DD.MM.YYYY')
+  msg.send "Hľadám denné menu na " + day
   numberOfPages = pages.length
+  dailyMenus = []
   i = 0
 
   while i < numberOfPages
