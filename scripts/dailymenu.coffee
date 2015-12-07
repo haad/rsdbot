@@ -100,7 +100,7 @@ menuRequest = (page, msg) ->
     if response.query.results.results
       r = response.query.results.results.div
       rCount = r.length
-      newResponse = '*' + page.title + '* (' + page.url + ')\n' 
+      newResponse = '*' + page.title + '*\n' 
       j = 0
 
       while j < rCount
@@ -121,7 +121,7 @@ menuRequest = (page, msg) ->
           newResponse += response
         j++
     else
-      newResponse = '*' + page.title + '* (' + page.url + ')\n' + '_Menu nie je dostupné_\n'
+      newResponse = '*' + page.title + '*\n' + '_Menu nie je dostupné_\n'
     msg.send newResponse
     #return newReponse
 
@@ -130,10 +130,10 @@ customMenuRequest = (page, msg) ->
   query.exec (error, response) ->
     if response.query.results.results
       r = response.query.results.results[ page.resultsContainer ]
-      newResponse = '*' + page.title + '* (' + page.url + ')\n'
+      newResponse = '*' + page.title + '*\n'
       newResponse += page.responseHandler( r )
     else
-      newResponse = '*' + page.title + '* (' + page.url + ')\n' + '_Menu nie je dostupné_\n'
+      newResponse = '*' + page.title + '*\n' + '_Menu nie je dostupné_\n'
     msg.send newResponse
 
 getDailyMenu = (pages, msg) ->
