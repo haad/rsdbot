@@ -49,7 +49,7 @@ pages = [
   {
     title: 'Lunch Break',
     url: 'http://www.lunch-break.sk/menu/',
-    customYql: "SELECT * FROM data.html.cssselect WHERE url='http://www.lunch-break.sk/menu/' AND css='#page-content table:first-child tbody tr'",
+    customYql: "SELECT * FROM data.html.cssselect WHERE url='http://www.lunch-break.sk/menu/' AND css='#page-content table tbody tr'",
     resultsContainer: 'tr',
     responseHandler: ( r ) ->
       today = moment().day()
@@ -79,10 +79,6 @@ pages = [
   {
     title: 'Family Fine Food',
     url: 'http://restauracie.sme.sk/restauracia/family-fine-food_6787-ruzinov_2980/denne-menu'
-  },
-  {
-    title: 'Presto',
-    url: 'http://restauracie.sme.sk/restauracia/presto-bbc-i_2406-ruzinov_2980/denne-menu'
   },
   {
       title: 'Buddies',
