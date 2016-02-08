@@ -23,7 +23,7 @@
     "hubot-scripts": "^2.5.16",
     "hubot-shipit": "^0.1.2",
     "hubot-slack": "slackhq/hubot-slack#master",
-    "hubot-stackstorm": "^0.1.2",
+    "hubot-stackstorm": "^0.3.1-rc2",
     "hubot-youtube": "^0.1.4",
     "moment": "^2.10.6",
     "yql": "^1.0.2"
