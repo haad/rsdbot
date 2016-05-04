@@ -76,10 +76,10 @@ pages = [
       
       return fullResponse
   },
-  {
-    title: 'Family Fine Food',
-    url: 'http://restauracie.sme.sk/restauracia/family-fine-food_6787-ruzinov_2980/denne-menu'
-  },
+  # {
+  #   title: 'Family Fine Food',
+  #   url: 'http://restauracie.sme.sk/restauracia/family-fine-food_6787-ruzinov_2980/denne-menu'
+  # },
   {
       title: 'Buddies',
       url: 'http://restauracie.sme.sk/restauracia/buddies_7319-ruzinov_2980/denne-menu'
@@ -132,12 +132,39 @@ customMenuRequest = (page, msg) ->
       newResponse = '*' + page.title + '*\n' + '_Menu nie je dostupné_\n'
     msg.send newResponse
 
+getBigger = (msg) ->
+  query = new YQL("SELECT * FROM data.html.cssselect WHERE url='http://bigger.sk/' AND css='#putac1 div'")
+  query.exec (error, response) ->
+    if response.query.results.results
+      r = response.query.results.results.div
+      rCount = r.length
+      newResponse = '*Bigger Denné menu*\n'
+      j = 0
+
+      response = r[0].a.content
+      response = response.replace(/(<([^>]+)>)/ig, "")
+      response = response.replace(/\W+/, '')
+      response = response.trim()
+      response = response + '\n'
+      newResponse += '• ' + response
+
+      response = r[2].content
+      response = response.replace(/(<([^>]+)>)/ig, "")
+      response = response.replace(/\W+/, '')
+      response = response.trim()
+      response = response + '\n'
+      newResponse += '• ' + response
+
+      msg.send newResponse
+
 getDailyMenu = (pages, msg) ->
   day = moment().format('DD.MM.YYYY')
   msg.send "Hľadám denné menu na " + day
   numberOfPages = pages.length
   dailyMenus = []
   i = 0
+  
+  getBigger(msg)
 
   while i < numberOfPages
     if pages[i].customYql
