@@ -14,6 +14,16 @@
 
 YQL = require "yql"
 moment = require "moment"
+request = require "request"
+
+zomatoKey = '4e1f6f82254556bb2b8250017433edfb'
+
+zomato = [
+  {
+    title: 'La Strada Ristorante',
+    id: 18014010
+  }
+]
 
 pages = [
   {
@@ -131,6 +141,33 @@ customMenuRequest = (page, msg) ->
     else
       newResponse = '*' + page.title + '*\n' + '_Menu nie je dostupné_\n'
     msg.send newResponse
+    
+zomatoMenu = (zom, msg) ->
+  options = {
+    url: 'https://developers.zomato.com/api/v2.1/dailymenu?res_id=' + zom.id,
+    json: true,
+    headers: {
+      'user_key': zomatoKey
+    }
+  }
+  
+  zomCallback = (error, response, body) ->
+    if (!error && response.statusCode == 200)
+      # console.log('zomato', zom.title, body)
+      newResponse = '*' + zom.title + '*\n'
+      
+      r = body.daily_menus[0].daily_menu.dishes
+      # console.log('r', r, r.length)
+      rCount = r.length
+      i = 0
+      while i < rCount
+        dish = r[i].dish.name.trim()
+        newResponse += '• ' + dish + ': ' + r[i].dish.price + '\n'
+        i++
+        
+      msg.send newResponse
+  
+  request( options, zomCallback )
 
 getBigger = (msg) ->
   query = new YQL("SELECT * FROM data.html.cssselect WHERE url='http://bigger.sk/' AND css='#putac1 div'")
@@ -157,7 +194,7 @@ getBigger = (msg) ->
 
       msg.send newResponse
 
-getDailyMenu = (pages, msg) ->
+getDailyMenu = (pages, zomato, msg) ->
   day = moment().format('DD.MM.YYYY')
   msg.send "Hľadám denné menu na " + day
   numberOfPages = pages.length
@@ -172,7 +209,13 @@ getDailyMenu = (pages, msg) ->
     else
       menuRequest(pages[i], msg)
     i++
+    
+  numberOfZomato = zomato.length
+  i = 0
+  while i < numberOfZomato
+    zomatoMenu( zomato[i], msg )
+    i++
 
 module.exports = (robot) ->
   robot.respond /((show|fetch)( me )?)?menu/i, (msg) ->
-    getDailyMenu(pages, msg)
+    getDailyMenu(pages, zomato, msg)
