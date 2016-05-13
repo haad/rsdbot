@@ -25,9 +25,9 @@
     "hubot-slack": "slackhq/hubot-slack#master",
     "hubot-stackstorm": "^0.3.1-rc2",
     "hubot-youtube": "^0.1.4",
+    "jq-html-parser": "^0.3.0",
     "moment": "^2.10.6",
-    "request": "^2.72.0",
-    "yql": "^1.0.2"
+    "request": "^2.72.0"
   },
   "engines": {
     "node": "0.10.x"
