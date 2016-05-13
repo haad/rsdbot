@@ -20,8 +20,28 @@ zomatoKey = '4e1f6f82254556bb2b8250017433edfb'
 
 zomato = [
   {
+    title: 'Buddies',
+    id: 17740573
+  },
+  {
     title: 'La Strada Ristorante',
     id: 18014010
+  },
+  {
+    title: 'Solo Sole',
+    id: 16508221
+  },
+  {
+    title: 'Sit & Eat',
+    id: 16507676
+  },
+  {
+    title: 'Presto BBC I.',
+    id: 16507666
+  },
+  {
+    title: 'Moose Pub',
+    id: 17805642
   }
 ]
 
@@ -101,6 +121,7 @@ pages = [
 ]
 
 menuRequest = (page, msg) ->
+  console.log('menuRequest', page.title, "SELECT * FROM data.html.cssselect WHERE url='" + page.url + "' AND css='.denne_menu .dnesne_menu .jedlo_polozka'")
   query = new YQL("SELECT * FROM data.html.cssselect WHERE url='" + page.url + "' AND css='.denne_menu .dnesne_menu .jedlo_polozka'")
   query.exec (error, response) ->
     if response.query.results.results
@@ -132,6 +153,7 @@ menuRequest = (page, msg) ->
     #return newReponse
 
 customMenuRequest = (page, msg) ->
+  console.log('menuRequest', page.title, "SELECT * FROM data.html.cssselect WHERE url='" + page.url + "' AND css='.denne_menu .dnesne_menu .jedlo_polozka'")
   query = new YQL(page.customYql)
   query.exec (error, response) ->
     if response.query.results.results
@@ -201,14 +223,14 @@ getDailyMenu = (pages, zomato, msg) ->
   dailyMenus = []
   i = 0
   
-  getBigger(msg)
+  # getBigger(msg)
 
-  while i < numberOfPages
-    if pages[i].customYql
-      customMenuRequest(pages[i], msg)
-    else
-      menuRequest(pages[i], msg)
-    i++
+  # while i < numberOfPages
+  #   if pages[i].customYql
+  #     customMenuRequest(pages[i], msg)
+  #   else
+  #     menuRequest(pages[i], msg)
+  #   i++
     
   numberOfZomato = zomato.length
   i = 0
